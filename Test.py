@@ -1,25 +1,20 @@
-dic = {}
-result = []
+students = {
+    "Alice": "A",
+    "Bob": "B",
+    "Charlie": "C",
+    "Dave": "B",
+    "Eve": "A"
+}
 
-for _ in range(int(input())):
-    friend, data, month = input().split()
-    celendar = dic.setdefault(friend, month)
-    #print(celendar)
-    
-print(dic)
-print(dic.values())
+target_grade = "B"
+keys = []
 
+for key in students:
+    print
+    if students[key] == target_grade:
+        keys.append(key)
 
-for _ in range(int(input())):
-    a = input()
-    for key in dic:
-        if dic[key] == a:
-            result.append(key)
-
-print(result)
 
 #keys = [key for key in students if students[key] == target_grade]
 
-
-
-
+print("Keys with target grade:", keys)
