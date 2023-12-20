@@ -1,9 +1,3 @@
-dic = {}
+lst = [i.split(', ') for i in iter(input, 'конец')]
 
-while input() != 'конец':
-    a = input()
-    taxi_driver, rating = a.split()
-    dic[taxi_driver] = rating
-    
-print(dic)
-
+print(lst)
