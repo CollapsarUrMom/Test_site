@@ -1,4 +1,4 @@
-def calculate(x, y, operation= 'a'):
+def calculate(x:float, y:float, operation:str='a') -> None:
     
     def addition(x, y):
         print(x + y)
