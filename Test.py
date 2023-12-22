@@ -1,6 +1,6 @@
 def calculate(x:float, y:float, operation:str='a') -> None:
     
-    def addition(x, y):
+    def addition(x:float, y:float):
         print(x + y)
 
     def subtraction(x, y):
