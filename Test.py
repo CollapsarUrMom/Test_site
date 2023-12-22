@@ -1,15 +1,40 @@
-dic = {}
+def calculate(x, y, operation= 'a'):
+    
+    def addition(x, y):
+        print(x + y)
 
-lst = [i.split(', ') for i in iter(input, 'конец')]
+    def subtraction(x, y):
+        print(x - y)
 
-for i in lst:
-    dic.setdefault(i[0], []).append(int(i[1]))
+    def division(x, y):
+        print(x / y)
 
-print(dic)
+    def multiplication(x, y):
+        print(x * y)
 
-for i in sorted(dic.keys()):
-    res = sum(dic[i])/len(dic[i])
-    dic[i] = res
+    if y == 0:
+        print('На ноль делить нельзя!')
+    elif operation == 'a':
+        addition(x, y)
+    elif operation == 's':
+        subtraction(x, y)
+    elif operation == 'd':
+        division(x, y)
+    elif operation == 'm':
+        multiplication(x, y)
+    elif operation != 'a' and 's' and 'd' and 'm':
+        print('Данной операции не существует')
 
-for i in sorted(dic.items(), key= lambda x: (-x[1], x[0])):
-    print(i[0], i[1])
+
+
+#assert calculate(2, 5) == 7.0
+assert calculate(2.2, 15, 'a') == 17.2
+assert calculate(22, 15, 's') == 7.0
+assert calculate(2, 3.2, 'm') == 6.4
+assert calculate(10, 0.4, 'd') == 25.0
+
+
+#addition - печатаем сложение двух чисел,
+#subtraction - печатаем вычитание из первого переданного параметра второго;
+#division - печатаем деление первого на второго,
+#multiplication - печатаем умножение двух чисел.
