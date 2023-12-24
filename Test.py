@@ -1,13 +1,13 @@
 import math
 
 rad = 0.01745329252
-sag = 3
+sag = 5
 
-for i in range(3, 365, 3):
-    x = (290 / 2) * math.cos(rad * i)
-    y = (290 / 2) * math.sin(rad * i)
-    x_next = (290 / 2) * math.cos(rad * (i + sag))
-    y_next = (290 / 2) * math.sin(rad * (i + sag))
+for i in range(1, 365, 5):
+    x = (185 / 2) * math.cos(rad * i)
+    y = (185 / 2) * math.sin(rad * i)
+    x_next = (185 / 2) * math.cos(rad * (i + sag))
+    y_next = (185 / 2) * math.sin(rad * (i + sag))
     l_x = x - x_next
     l_y = y - y_next
     processing_width = math.sqrt((l_x ** 2) + (l_y ** 2))
