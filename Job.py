@@ -4,7 +4,7 @@ rad = 0.01745329252 # Радианы
 start = 1 # Градусы
 step = 3 # Шаг
 end = 365 # Конечный градус
-diametr = 290 # Диаметр
+diametr = 185 # Диаметр
 
 for i in range(start, end, step):
     x = (diametr / 2) * math.cos(rad * i)
