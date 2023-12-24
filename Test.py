@@ -1,19 +1,16 @@
-def create_accumulator():
-    value = 0
-    def inner_func(num):
+def multiply(value):
+
+    def inner(num):
         nonlocal value
-        value += num
-        return value
-    return inner_func
+        num *= value
+        return num
+    return inner
 
-simulator_1 = create_accumulator()
-print(simulator_1(2))
-print(simulator_1(5))
-print(simulator_1(10))
 
-simulator_2 = create_accumulator()
-print(simulator_2(11))
-print(simulator_2(10))
-print(simulator_2(15))
 
-print(simulator_1(3))
+f_2 = multiply(2)
+print("Умножение 2 на 5 =", f_2(5)) #10
+print("Умножение 2 на 15 =", f_2(15)) #30
+f_3 = multiply(3)
+print("Умножение 3 на 5 =", f_3(5)) #15
+print("Умножение 3 на 15 =", f_3(15)) #45
