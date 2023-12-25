@@ -1,21 +1,23 @@
-def average_numbers():
-    numbers = []
-    def inner(number):
-        numbers.append(number)
-        print(numbers)
-        return sum(numbers) / len(numbers)
+def create_dict():
+    dic = {}
+    count = 0
 
+    def inner(value):
+        nonlocal count
+        count += 1
+        dic[count] = value
+        return dic
+    
     return inner
 
-r1 = average_numbers()
-print(r1(1))
-print(r1(10))
-print(r1(100))
-print(r1(1000))
-print(r1(10000))
+f_1 = create_dict()
+print(f_1('hello')) # f_1 возвращает {1: 'hello'}
+print(f_1(4)) # f_1 возвращает {1: 4}
+print(f_1(100)) # f_1 возвращает {1: 'hello', 2: 100}
+print(f_1([1, 2, 3])) # f_1 возвращает {1: 'hello', 2: 100, 3: [1, 2, 3]}
 
-r2 = average_numbers()
-print(r2(1))
-print(r2(10))
-print(r2(100))
-print(r1(100000))
+f_2 = create_dict() # создаем новое замыкание в f_2
+print(f_2('PoweR')) # f_2 возвращает {1: 'PoweR'}
+
+f_3 = create_dict() # создаём замыкание в f_3
+print(f_3(4)) # f_1 возвращает {1: 4}
