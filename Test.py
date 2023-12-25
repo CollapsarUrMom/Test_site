@@ -1,16 +1,21 @@
-def multiply(value):
+def average_numbers():
+    numbers = []
+    def inner(number):
+        numbers.append(number)
+        print(numbers)
+        return sum(numbers) / len(numbers)
 
-    def inner(num):
-        nonlocal value
-        num *= value
-        return num
     return inner
 
+r1 = average_numbers()
+print(r1(1))
+print(r1(10))
+print(r1(100))
+print(r1(1000))
+print(r1(10000))
 
-
-f_2 = multiply(2)
-print("Умножение 2 на 5 =", f_2(5)) #10
-print("Умножение 2 на 15 =", f_2(15)) #30
-f_3 = multiply(3)
-print("Умножение 3 на 5 =", f_3(5)) #15
-print("Умножение 3 на 15 =", f_3(15)) #45
+r2 = average_numbers()
+print(r2(1))
+print(r2(10))
+print(r2(100))
+print(r1(100000))
