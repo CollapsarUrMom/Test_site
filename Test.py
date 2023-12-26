@@ -1,23 +1,16 @@
-def create_dict():
-    dic = {}
-    count = 0
+#def add(a, b):
+    #return a + b
 
-    def inner(value):
+def counter(func):
+    count = 0
+    def inner(*args, **kwargs):
         nonlocal count
         count += 1
-        dic[count] = value
-        return dic
-    
+        print(f'функция {func.__name__} вызывалась {count} раз')
+        return func(*args,**kwargs)
+
     return inner
+q = counter(lambda a, b: a + b)
 
-f_1 = create_dict()
-print(f_1('hello')) # f_1 возвращает {1: 'hello'}
-print(f_1(4)) # f_1 возвращает {1: 4}
-print(f_1(100)) # f_1 возвращает {1: 'hello', 2: 100}
-print(f_1([1, 2, 3])) # f_1 возвращает {1: 'hello', 2: 100, 3: [1, 2, 3]}
-
-f_2 = create_dict() # создаем новое замыкание в f_2
-print(f_2('PoweR')) # f_2 возвращает {1: 'PoweR'}
-
-f_3 = create_dict() # создаём замыкание в f_3
-print(f_3(4)) # f_1 возвращает {1: 4}
+q(10, 20)
+q(2,5)
