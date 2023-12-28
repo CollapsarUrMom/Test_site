@@ -2,14 +2,12 @@ from functools import wraps
 
 def memoize(func):
     d = {}
-    @wraps
-    def inner(*args):
-        if args in d:
-            return d[args]
+    @wraps(func)
+    def inner(n):
+        if n in d:
+            return d.get(n)
         else:
-            d[args] = func(*args)
-            return inner
-        
+            return d.setdefault(n, func(n))
     return inner
 
 
