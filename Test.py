@@ -1,14 +1,37 @@
-def double_it(func):
+from functools import wraps
 
-    def inner(*args, **kwargs):
-        a = func(*args, **kwargs)
-        return a + a
+def add_args(func):
+
+    @wraps(func)
+    def inner(*args):
+        args = ('begin', *args, 'end')
+        return func(*args)
     return inner
 
 
-@double_it
-def multiply(num1, num2):
-    return num1 * num2
+@add_args
+def concatenate(*args):
+    """
+    Возвращает конкатенацию переданных строк
+    """
+    return ', '.join(args)
 
-res = multiply(9, 4) # произведение 9*4=36, но декоратор double_it удваивает это значение
-print(res)
+
+@add_args
+def find_max_word(*args):
+    """
+    Возвращает слово максимальной длины
+    """
+    return max(args, key=len)
+
+
+print(concatenate('hello', 'world', 'my', 'name is', 'Artem'))
+assert concatenate('hello', 'world', 'my', 'name is', 'Artem') == 'begin, hello, world, my, name is, Artem, end'
+assert concatenate('my', 'name is', 'Artem') == 'begin, my, name is, Artem, end'
+assert concatenate.__name__ == 'concatenate'
+assert concatenate.__doc__.strip() == """Возвращает конкатенацию переданных строк"""
+assert find_max_word('my') == 'begin'
+assert find_max_word('my', 'how') == 'begin'
+assert find_max_word('my', 'how', 'maximum') == 'maximum'
+assert find_max_word.__name__ == 'find_max_word'
+assert find_max_word.__doc__.strip() == """Возвращает слово максимальной длины"""
