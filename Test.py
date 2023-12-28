@@ -1,37 +1,34 @@
 from functools import wraps
 
-def add_args(func):
-
-    @wraps(func)
+def memoize(func):
+    d = {}
+    @wraps
     def inner(*args):
-        args = ('begin', *args, 'end')
-        return func(*args)
+        if args in d:
+            return d[args]
+        else:
+            d[args] = func(*args)
+            return inner
+        
     return inner
 
 
-@add_args
-def concatenate(*args):
+@memoize
+def fibonacci(n):
     """
-    Возвращает конкатенацию переданных строк
+    Возвращает n-ое число Фибоначчи
     """
-    return ', '.join(args)
+    if n < 2:
+        return n
+    return fibonacci(n - 1) + fibonacci(n - 2)
 
 
-@add_args
-def find_max_word(*args):
-    """
-    Возвращает слово максимальной длины
-    """
-    return max(args, key=len)
-
-
-print(concatenate('hello', 'world', 'my', 'name is', 'Artem'))
-assert concatenate('hello', 'world', 'my', 'name is', 'Artem') == 'begin, hello, world, my, name is, Artem, end'
-assert concatenate('my', 'name is', 'Artem') == 'begin, my, name is, Artem, end'
-assert concatenate.__name__ == 'concatenate'
-assert concatenate.__doc__.strip() == """Возвращает конкатенацию переданных строк"""
-assert find_max_word('my') == 'begin'
-assert find_max_word('my', 'how') == 'begin'
-assert find_max_word('my', 'how', 'maximum') == 'maximum'
-assert find_max_word.__name__ == 'find_max_word'
-assert find_max_word.__doc__.strip() == """Возвращает слово максимальной длины"""
+assert fibonacci(50) == 12586269025
+assert fibonacci(60) == 1548008755920
+assert fibonacci(70) == 190392490709135
+assert fibonacci(80) == 23416728348467685
+assert fibonacci(90) == 2880067194370816120
+assert fibonacci(100) == 354224848179261915075
+assert fibonacci.__name__ == 'fibonacci'
+assert fibonacci.__doc__.strip() == 'Возвращает n-ое число Фибоначчи'
+print('Good')
