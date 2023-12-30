@@ -1,5 +1,3 @@
-from string import ascii_lowercase, ascii_uppercase, punctuation
+import What's_going_on_here
 
-print(punctuation)
-print(ascii_uppercase)
-print(ascii_lowercase)
+print(__name__)
