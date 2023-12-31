@@ -32,5 +32,3 @@ assert fibonacci(100) == 354224848179261915075
 assert fibonacci.__name__ == 'fibonacci'
 assert fibonacci.__doc__.strip() == 'Возвращает n-ое число Фибоначчи'
 print('Good')
-
-print(f'Modul What...{__name__}')
