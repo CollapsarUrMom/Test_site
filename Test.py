@@ -1,8 +1,7 @@
-def file_n_lines(file_name: str, n: int) -> None:
-    file = open(file_name, 'r', encoding= 'UTF-8')
-    for i in range(n):
-        print(file.readline().strip())
+def create_file_with_numbers(n: int) -> None:
+    file = open(f'range_{n}.txt', mode= 'w')
+    for num in range(1, n + 1):
+        file.write(str(num) + '\n')
     file.close()
 
-
-print(file_n_lines('hello.txt', 2))
+print(create_file_with_numbers(6))
