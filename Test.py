@@ -1,17 +1,14 @@
-def longest_word_in_file(file_name: str) -> str:
-    file = open(file_name, mode= 'r', encoding= 'UTF-8')
-    count = 0
-    sum_numbers = 0
-    for word in file.read().split():
-        if len(word) == 3:
-            count += 1
-        elif len(word) == 2:
-            sum_numbers += int(word)
-    file.close()
-    return count, sum_numbers
+def find_lines_len_more_6(file_name: str) -> int:
+    with open(file_name, mode= 'r', encoding= 'UTF-8') as file:
+        count = 0
+        lines = [line.strip() for line in file]
+        for i in lines:
+            if len(i) > 6:
+                count += 1
+        return count
 
 
 
 
 
-print(longest_word_in_file('D:\\Alex\\Сегодня\\numbers.txt'))
+print(find_lines_len_more_6('hello.txt'))
