@@ -1,11 +1,6 @@
-# Создайте генератор
-from_10_to_20 = (i for i in range(10, 21, 1))
+weekday = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
-# Распечатайте три первых значения
-print(next (from_10_to_20))
-print(next (from_10_to_20))
-print(next (from_10_to_20))
+days = ((i, weekday[(i + 4) % 7]) for i in range(1, 78))
 
-# выведите все оставшиеся
-for value in from_10_to_20:
-    print(value)
+for i in days:
+    print(i)
