@@ -1,6 +1,11 @@
-weekday = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+from typing import Generator
 
-days = ((i, weekday[(i + 4) % 7]) for i in range(1, 78))
+def my_range_gen(num) -> Generator[int, None, None]:
+    start = 0
+    end = num - 1
+    while start != end:
+        start += 1
+        yield start
 
-for i in days:
+for i in my_range_gen(10):
     print(i)
