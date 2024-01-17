@@ -1,5 +1,25 @@
-numbers = [116, -411, 448, 636, -254, -295, 220, 216, 187, -150, -458, -372, 450, 141, -626, -168, -383, 389, -184, 609, 221, 311, 526, 254, -631, -174, -555, -338, 226, 695, -16, 333, 12, -600, -258, -383, -101, 121, 40, 278, 118, -462, -671, 78, -69, -568, -228, -445, -47, -565]
+#lst = []
+#string = input()
+#for i in string.split():
+    #a = i.upper()
+    #b = i.lower()
+    #c = a, b
+    #lst.append(c)
+#print(lst)
 
-increase_3 = list(map(lambda x: x * 3, numbers))
+#==================================
 
-print(increase_3)
+#lst = []
+
+#def handler(word):
+    #upper = word.upper()
+    #lower = word.lower()
+    #return upper, lower
+
+#for letter in map(handler, input().split()):
+    #lst.append(letter)
+#print(lst)
+
+#===================================
+
+print(list(map(lambda x:(x.upper(), x.lower()), input().split())))
