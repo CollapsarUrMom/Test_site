@@ -1,25 +1,5 @@
-#lst = []
-#string = input()
-#for i in string.split():
-    #a = i.upper()
-    #b = i.lower()
-    #c = a, b
-    #lst.append(c)
-#print(lst)
+days = ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve']
 
-#==================================
+a = list(filter(lambda x: len(x) == 4 or x[0]  == 'S', days))
 
-#lst = []
-
-#def handler(word):
-    #upper = word.upper()
-    #lower = word.lower()
-    #return upper, lower
-
-#for letter in map(handler, input().split()):
-    #lst.append(letter)
-#print(lst)
-
-#===================================
-
-print(list(map(lambda x:(x.upper(), x.lower()), input().split())))
+print(sorted(a), sep= '\n')
