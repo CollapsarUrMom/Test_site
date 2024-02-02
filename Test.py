@@ -1,34 +1,34 @@
-# Напишите определение класса Robot       
-class Robot:
+# Напишите определение класса Constructor       
+class Constructor():
 
-    def say_hello(self):
-        if hasattr(self, 'name'):
-            print(f'Hello, human! My name is', getattr(self, 'name'))
-        else:
-            print('У робота нет имени')
+    def add_atribute(self, key, value):
+        setattr(self, key, value)
 
-        
-    def say_bye(self):
-        print('See u later alligator')
+    def display(self):
+        print(self.__dict__)
 
-    def set_name(my_robot, name):
-        my_robot.name = name
-        return my_robot.name
+# Ниже код для проверки класса Constructor 
 
-# Ниже код для проверки класса Robot 
+obj1 = Constructor()
+assert obj1.__dict__ == {}
+obj1.display()
+obj1.add_atribute('color', 'red')
+assert obj1.color == 'red'
+obj1.add_atribute('width', 20)
+assert obj1.width == 20
+obj1.display()
 
-c3po = Robot()
-c3po.say_hello()
-c3po.set_name('R2D2')
-c3po.say_hello()
-c3po.say_bye()
+obj2 = Constructor()
+obj2.display()
+obj2.add_atribute('height', 100)
+assert obj2.height == 100
+obj2.display()
 
-r = Robot()
-r.set_name('Chappy')
-r.say_hello()
-
-d = Robot()
-d.say_hello()
-d.set_name('Wally')
-d.say_hello()
-print('========================================')
+obj3 = Constructor()
+obj3.display()
+obj3.add_atribute('a', 100)
+obj3.add_atribute('b', 300)
+obj3.add_atribute('c', 200)
+obj3.add_atribute('b', 1)
+assert obj3.__dict__ == {'a': 100, 'b': 1, 'c': 200}
+obj3.display()
