@@ -1,33 +1,30 @@
-class Point:
+# Напишите определение класса Laptop       
+class Laptop:
     
-    def set_coordinates(point_1, x, y):
-        point_1.x = x
-        point_1.y = y
+    def __init__(self, brand= "model", model= 1, price= 0, laptop_name= 3):
+        self.brand = brand
+        self.model = model
+        self.price = price
+        self.laptop_name = laptop_name
+        
 
-    def get_distance(point_1, point_2):
-        if isinstance(point_2, Point):
-            return ((point_1.x - point_2.x) ** 2 + (point_1.y - point_2.y) ** 2) ** 0.5
-        else:
-            print('Передана не точка')
+# Ниже код для проверки класса Laptop и ЭК laptop1 и laptop2
+laptop1 = Laptop()
+laptop2 = Laptop()
 
-# Код ниже не удаляйте, он нужен для проверок
-p1 = Point()
-p2 = Point()
-assert isinstance(p1, Point)
-assert isinstance(p2, Point)
+assert isinstance(laptop1, Laptop)
+assert isinstance(laptop2, Laptop)
 
-p1.set_coordinates(1, 2)
-assert p1.x == 1
-assert p1.y == 2
-p2.set_coordinates(4, 6)
-assert p2.x == 4
-assert p2.y == 6
-assert p1.get_distance(p2) == 5.0
-p3 = Point()
-p3.set_coordinates(10, 10)
-p1.set_coordinates(4, 2)
-assert p1.get_distance(p3) == 10.0
-res = p1.get_distance(10)  # Распечатает "Передана не точка", вернет None
-assert res is None, 'Метод get_distance должен возвращать None, если в него была передана не точка'
+hp = Laptop('hp', '15-bw0xx', 57000)
+assert hp.laptop_name == 'hp 15-bw0xx'
+assert hp.price == 57000
+assert isinstance(hp, Laptop)
 
-assert p2.get_distance([1, 2, 3]) is None  # Распечатает "Передана не точка", вернет None
+
+lenovo = Laptop('lenovo', 'z-570-dx', 61000)
+assert lenovo.brand == 'lenovo'
+assert lenovo.model == 'z-570-dx'
+assert lenovo.price == 61000
+assert lenovo.laptop_name == 'lenovo z-570-dx'
+assert isinstance(lenovo, Laptop)      
+print('Good')
