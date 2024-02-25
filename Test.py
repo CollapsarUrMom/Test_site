@@ -1,57 +1,48 @@
-# Напишите определение класса SoccerPlayer       
-class SoccerPlayer:
+class Numbers:
+
+    def __init__(self, *args):
+        self.lst = list(args)
+
+    def get_positive(self):
+        return [i for i in self.lst if i > 0]
     
-    def __init__(self, name= '', surname= '', goals= 0, assists= 0):
-        self.name = name
-        self.surname = surname
-        self.goals = goals
-        self.assists = assists
+    def get_negative(self):
+        return [i for i in self.lst if i < 0]
+    
+    def get_zeroes(self):
+        return [i for i in self.lst if i == 0]
+    
+    def add_number(self, num):
+        self.lst.append(num)
+    
 
-    def score(self, goals= 1):
-        self.goals += goals
+nums = Numbers(1, 2, -4, -5, 3)
+assert nums.lst == [1, 2, -4, -5, 3]
+assert nums.get_positive() == [1, 2, 3]
+assert nums.get_negative() == [-4, -5]
 
-    def make_assist(self, assists= 1):
-        self.assists += assists
+nums2 = Numbers(10, 20, 30, 0, 0, 5)
 
-    def statistics(self):
-        print(f'{self.surname} {self.name} - голы: {self.goals} передачи: {self.assists}')
+assert nums2.get_positive() == [10, 20, 30, 5]
+assert nums2.get_zeroes() == [0, 0]
+nums2.add_number(100)
+nums2.add_number(0)
+nums2.add_number(7)
+assert nums2.get_positive() == [10, 20, 30, 5, 100, 7]
+assert nums2.get_zeroes() == [0, 0, 0]
 
-# Ниже код для проверки методов класса SoccerPlayer
-leo = SoccerPlayer('Leo', 'Messi')
-assert isinstance(leo, SoccerPlayer)
-assert leo.__dict__ == {'name': 'Leo', 'surname': 'Messi', 'goals': 0, 'assists': 0}
-leo.score(700)
-assert leo.goals == 700
-leo.make_assist(500)
-assert leo.assists == 500
+nums = Numbers(7, 8, 9)
+nums_2 = Numbers(7, 8, 9)
 
-leo.statistics()
+nums.add_number(10)
+nums_2.add_number(11)
+nums_2.add_number(12)
+assert nums.get_positive() == [7, 8, 9, 10]
+assert nums_2.get_positive() == [7, 8, 9, 11, 12]
 
-kokorin = SoccerPlayer('Alex', 'Kokorin')
-assert isinstance(kokorin, SoccerPlayer)
-assert kokorin.name == 'Alex'
-assert kokorin.surname == 'Kokorin'
-assert kokorin.assists == 0
-assert kokorin.goals == 0
-kokorin.score()
-assert kokorin.goals == 1
-kokorin.score(5)
-assert kokorin.goals == 6
-kokorin.make_assist()
-assert kokorin.assists == 1
-kokorin.make_assist(10)
-assert kokorin.assists == 11
+nums_3 = Numbers(-1, -2, -3, 0, -6, -4, 0, 0)
 
-kokorin.statistics()
-
-
-obi = SoccerPlayer('Оби-Ван', 'Кеноби')
-obi.make_assist()
-assert obi.name == 'Оби-Ван'
-assert obi.surname == 'Кеноби'
-assert obi.__dict__ == {'name': 'Оби-Ван', 'surname': 'Кеноби', 'goals': 0, 'assists': 1}
-obi.statistics()
-
-mila = SoccerPlayer('Mila', 'Kunis')
-mila.make_assist()
-mila.statistics()
+assert nums_3.get_positive() == []
+assert nums_3.get_negative() == [-1, -2, -3, -6, -4]
+assert nums_3.get_zeroes() == [0, 0, 0]
+print('Good')
