@@ -1,81 +1,29 @@
-# Напишите определение класса Stack
-class Stack:
+class Worker:
 
-    def __init__(self, values= []):
-        self.values = list(values)
+    def __init__(self, name, salary, gender, passport):
+        self.name = name
+        self.salary = salary
+        self.gender = gender
+        self.passport = passport
 
-    def push(self, item):
-        self.values.append(item)
-
-    def pop(self):
-        if self.values == []:
-            print('Empty Stack')
-        self.values.[-1]
-
-    def peek(self):
-        if self.values == []:
-            print('Empty Stack')
-            return None
-        else:
-            return self.values[-1]
-        
-    def is_empty(self):
-        if self.values == []:
-            return True
-        return False
-    
-    def size(self):
-        return len(self.values)
-
-# Ниже код для проверки класса Stack
-
-s = Stack()
-assert s.values == []
-assert isinstance(s, Stack)
-
-s.peek()  # распечатает 'Empty Stack'
-assert s.is_empty() is True
-s.push('cat')
-assert s.size() == 1
-assert s.peek() == 'cat'
-
-s.push('dog')
-assert s.size() == 2
-assert s.peek() == 'dog'
-
-s.push(True)
-assert s.size() == 3
-assert s.is_empty() is False
-
-s.push(777)
-assert s.size() == 4
-
-assert s.pop() == 777
-assert s.size() == 3
-
-assert s.pop() is True
-assert s.size() == 2
-
-s.push(123)
-s.push(123456)
-assert s.peek() == 123456
-assert s.size() == 4
-
-assert s.pop() == 123456
-assert s.pop() == 123
-assert s.pop() == 'dog'
-assert s.is_empty() is False
-assert s.pop() == 'cat'
-assert s.is_empty() is True
+    def get_info(self):
+        print(f'Worker {self.name}; passport-{self.passport}')
 
 
-d = Stack()
-assert d.peek() is None  # Печатает "Empty Stack"
-assert d.pop() is None  # Печатает "Empty Stack"
-d.push('hello')
-assert d.size() == 1
-d.push('world')
-assert d.size() == 2
-assert d.peek() == 'world'
-assert d.pop() == 'world'
-assert d.peek() == 'hello'
+persons= [
+    ('Allison Hill', 334053, 'M', '1635644202'),
+    ('Megan Mcclain', 191161, 'F', '2101101595'),
+    ('Brandon Hall', 731262, 'M', '6054749119'), 
+    ('Michelle Miles', 539898, 'M', '1355368461'),
+    ('Donald Booth', 895667, 'M', '7736670978'), 
+    ('Gina Moore', 900581, 'F', '7018476624'),
+    ('James Howard', 460663, 'F', '5461900982'), 
+    ('Monica Herrera', 496922, 'M', '2955495768'),
+    ('Sandra Montgomery', 479201, 'M', '5111859731'), 
+    ('Amber Perez', 403445, 'M', '0602870126')
+]
+
+
+for prs in persons:
+    print(prs)
+    a = Worker('Allison Hill', 334053, 'M', '1635644202')

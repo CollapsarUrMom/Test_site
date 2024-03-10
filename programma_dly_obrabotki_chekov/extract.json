@@ -1,0 +1,49 @@
+[
+    {
+        "_id":"65e0c6fbae1724083701f19e",
+        "createdAt":"2024-02-29T18:03:39+00:00",
+        "ticket":{
+                "document":{
+            "receipt":{
+                "buyerPhoneOrAddress":"+79520980383",
+                "cashTotalSum":0,
+                "code":3,
+                "creditSum":0,
+                "dateTime":"2024-02-28T22:00:00",
+                "ecashTotalSum":191300,
+                "fiscalDocumentFormatVer":2,
+                "fiscalDocumentNumber":163795,
+                "fiscalDriveNumber":"7281440701371443",
+                "fiscalSign":2374022813,
+                "internetSign":1,
+                "items":[{
+                    "name":"Нулевая N шина на двух угловых синих изоляторах REXANT 6х9 мм 10 групп 11-2327",
+                    "nds":3,
+                    "paymentType":1,
+                    "price":11400,
+                    "productType":1,
+                    "quantity":1,
+                    "sum":11400
+                }, {
+                    "name":"Щипцы для зачистки электропроводов GROSS 17718",
+                    "nds":3,
+                    "paymentType":1,
+                    "price":179900,
+                    "productType":1,
+                    "quantity":1,
+                    "sum":179900
+                    }]
+                ,"kktRegId":"0003517646064053    ",
+                "machineNumber":"KKT024829",
+                "nds18118":31883,
+                "operationType":1,
+                "prepaidSum":0,
+                "provisionSum":0,
+                "requestNumber":1422,
+                "retailPlace":"http://www.vseinstrumenti.ru/",
+                "sellerAddress":"payments@vseinstrumenti.ru",
+                "shiftNumber":114,"taxationType":1,
+                "appliedTaxationType":1,
+                "totalSum":191300,
+                "user":"ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ВСЕИНСТРУМЕНТЫ.РУ\"","userInn":"7722753969  "
+}}}}]
