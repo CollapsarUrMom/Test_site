@@ -1,5 +1,6 @@
 import openpyxl
 import json
+import data_base
 
 #===============================================
 #  Json файла с чеками
@@ -27,7 +28,6 @@ count_items = len(cheque["ticket"]["document"]["receipt"]["items"])
 #  Цикл создания словаря из нужных значений
 
 dict_product = {}
-list_product = []
 
 
 for i in range(count_items):
@@ -75,17 +75,25 @@ class Check:
         for key in self.dict_product:
             month = int(dict_product[key][2][5:7])
             day = int(dict_product[key][2][8:])
-            if key in list_product:
-                self.add_price(self, key)
+            b = 0
+            for row in expenses.iter_rows(min_row= 2, min_col= 2, max_row= 7, max_col= 2):
+                for i in row:
+                    if i.value == key:
+                        expenses.row(i)
+                        a = i
+                        print(a)
+                        print(type(a))
+                        b += 1
+            if b == 1:
+                self.add_price(self, key, day, a)
             else:
-                list_product.append(key)
-                side = self.cell_search()
-                expenses[f'B{side}'] = key
-                expenses[f'{celendar[day]}{side}'] = dict_product[key][0]
+                line = self.cell_search()
+                expenses[f'B{line}'] = key
+                expenses[f'{celendar[day]}{line}'] = dict_product[key][0]
                 
 
-    def add_price(self, key):
-        pass
+    def add_price(self, key, day, line):
+        expenses[f'{celendar[day]}{line}'] = dict_product[key][0]
 
     def cell_search(self):
         count = 2
