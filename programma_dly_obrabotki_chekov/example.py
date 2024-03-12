@@ -62,16 +62,6 @@ wb = openpyxl.load_workbook(filename= 'test.xlsx')
 expenses = wb['Расходы']
 income = wb['Доходы']
 
-count = 2
-
-for product in dict_product.keys():
-    month = int(dict_product[product][2][5:7])
-    day = int(dict_product[product][2][8:])
-    if expenses[f'B{count}'] != None:
-        expenses[f'B{count}'] = product
-        expenses[f'{celendar[day]}{count}'] = dict_product[product][0] #price
-    i += 1
-
 
 class Check:
 
@@ -83,30 +73,30 @@ class Check:
 
     def scaning_products(self, element):
         for key in self.dict_product:
+            month = int(dict_product[key][2][5:7])
+            day = int(dict_product[key][2][8:])
             if key in list_product:
-                self.add_price(self, count)
+                self.add_price(self, key)
             else:
                 list_product.append(key)
-                self.cell_search()
+                side = self.cell_search()
+                expenses[f'B{side}'] = key
+                expenses[f'{celendar[day]}{side}'] = dict_product[key][0]
                 
 
-    def add_price(self, count):
-        pass#expenses[f'{celendar[day]}{count}'] = dict_product[product][0]
+    def add_price(self, key):
+        pass
 
     def cell_search(self):
         count = 2
         while expenses[f'B{count}'].value is not None:
             count += 1
-        self.add_price(self, count)
+        return count
+
 
 
 ch = Check(dict_product)
-#ch.adding_elements(10)
-print(ch)
-
-
-
-        
+  
 
 wb.save('test.xlsx')
 wb.close()
