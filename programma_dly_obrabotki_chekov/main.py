@@ -8,27 +8,16 @@ import data_base
 with open('C:\\Users\\Alex_job\\Documents\\Git\\Test_site\\programma_dly_obrabotki_chekov\\extract.json', mode= 'r', encoding= 'UTF-8') as file:
     my_file = json.load(file)
     new_json = json.dumps(my_file, ensure_ascii=False, indent= 4)
-    my_json = json.loads(new_json)
+    my_json = json.loads(new_json)  
 
-
-#===============================================
-#  Сделал для теста    
-
-cheque = my_json[0]
-
-data_purchase = cheque['createdAt']
-product_name = cheque["ticket"]["document"]["receipt"]["items"][1]["name"]
-price_product = cheque["ticket"]["document"]["receipt"]["items"][0]["price"]
-quantity = cheque["ticket"]["document"]["receipt"]["items"][0]["quantity"]
-
-count_items = len(cheque["ticket"]["document"]["receipt"]["items"])
-
+cheque = my_json[0] #Если файл состоит из нескольких чеков, то тут должен быть цикл for
 
 #===============================================
 #  Цикл создания словаря из нужных значений
 
 dict_product = {}
 
+count_items = len(cheque["ticket"]["document"]["receipt"]["items"])
 
 for i in range(count_items):
     #dict_product = {cheque["ticket"]["document"]["receipt"]["items"][i]["name"] : [cheque["ticket"]["document"]["receipt"]["items"][i]["price"], cheque["ticket"]["document"]["receipt"]["items"][i]["quantity"]]}
@@ -64,8 +53,6 @@ income = wb['Доходы']
 
 
 class Check:
-
-    count = 2
     
     def __init__(self, check):
         self.dict_product = check
@@ -75,32 +62,15 @@ class Check:
         for key in self.dict_product:
             month = int(dict_product[key][2][5:7])
             day = int(dict_product[key][2][8:])
-            b = 0
-            for row in expenses.iter_rows(min_row= 2, min_col= 2, max_row= 7, max_col= 2):
-                for i in row:
-                    if i.value == key:
-                        expenses.row(i)
-                        a = i
-                        print(a)
-                        print(type(a))
-                        b += 1
-            if b == 1:
-                self.add_price(self, key, day, a)
-            else:
-                line = self.cell_search()
-                expenses[f'B{line}'] = key
-                expenses[f'{celendar[day]}{line}'] = dict_product[key][0]
-                
-
-    def add_price(self, key, day, line):
-        expenses[f'{celendar[day]}{line}'] = dict_product[key][0]
-
-    def cell_search(self):
+            line = self.product_search(key)
+            expenses[f'B{line}'] = key
+            expenses[f'{celendar[day]}{line}'] = dict_product[key][0]
+    
+    def product_search(self, key):
         count = 2
-        while expenses[f'B{count}'].value is not None:
+        while expenses[f'B{count}'].value != key and expenses[f'B{count}'].value is not None:
             count += 1
         return count
-
 
 
 ch = Check(dict_product)
@@ -119,3 +89,17 @@ print('Good')
 #'C:\\Users\\Alex_job\\Documents\\Git\\Test_site\\My.json'
 
 #'C:\\Users\\Alex_job\\Documents\\Git\\Test_site\\programma_dly_obrabotki_chekov\\extract.json'
+
+
+
+#b = 0
+#            for row in expenses.iter_rows(min_row= 2, min_col= 2, max_row= 7, max_col= 2):
+#                for i in row:
+#                    if i.value == key:
+#                        expenses.row(i)
+#                        a = i
+#                        print(a)
+#                        print(type(a))
+#                        b += 1
+#            if b == 1:
+#                self.add_price(self, key, day, a)
