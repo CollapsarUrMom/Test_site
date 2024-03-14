@@ -1,6 +1,5 @@
 import openpyxl
 import json
-import data_base
 
 #===============================================
 #  Json файла с чеками
@@ -31,7 +30,7 @@ celendar_month = {1:'Январь', 2:'Февраль', 3:'Март', 4:'Апр�
 #===============================================
 #  Открытие сущетвующего файла exel и его наполнение чеками
 
-wb = openpyxl.load_workbook(filename= 'test.xlsx')
+wb = openpyxl.load_workbook(filename= 'C:\\Users\\Alex_job\\Documents\\Git\\Test_site\\programma_dly_obrabotki_chekov\\test.xlsx')
 
 expenses = wb['Расходы']
 income = wb['Доходы']
