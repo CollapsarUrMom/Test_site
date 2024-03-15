@@ -6,24 +6,16 @@ import json
 
 with open('C:\\Users\\Alex_job\\Documents\\Git\\Test_site\\programma_dly_obrabotki_chekov\\extract.json', mode= 'r', encoding= 'UTF-8') as file:
     my_file = json.load(file)
-    new_json = json.dumps(my_file, ensure_ascii=False, indent= 4)
-    my_json = json.loads(new_json)  
+    new_json = json.dumps(my_file, ensure_ascii= False, indent= 4)
+    my_json = json.loads(new_json)
+    with open('cheque.json', 'w', encoding= 'UTF-8') as out_file:
+        json.dump(my_file, out_file, ensure_ascii= False, indent= 4)\
 
-#===============================================
-#  Кадры для созданрия файла exel и его заполнения (шаблон)
 
-#wb = Workbook()
-#income = wb.active
-#expenses = wb.create_sheet('Расходы')
-#income.title = 'Доходы'
-#income['A1'] = product_name
-#expenses['A1'] = 'Январь'
-#expenses['A2'] = 'Категория'
-#expenses['B2'] = 'Подкатегория'
-#expenses['A3'] = 'Продукты'
 celendar_day = {1:'c', 2:'d', 3:'e', 4:'f', 5:'g', 6:'h', 7:'i', 8:'j', 9:'k', 10:'l', 11:'m', 12:'n',
              13:'o', 14:'p', 15:'q', 16:'r', 17:'s', 18:'t', 19:'u', 20:'v', 21:'w', 22:'x', 23:'y',
              24:'z', 25:'aa', 26:'ab', 27:'ac', 28:'ad', 29:'ae', 30:'af', 31:'ag'}
+
 celendar_month = {1:'Январь', 2:'Февраль', 3:'Март', 4:'Апрель', 5:'Май', 6:'Июнь',
                     7:'Июль', 8:'Август', 9:'Сентябрь', 10:'Октябрь', 11:'Ноябрь', 12:'Декабрь'}
 
@@ -49,10 +41,10 @@ class Check:
         for key in self.dict_product:
             line = self.product_search(key, month_line)
             if expenses[f'B{line}'].value == key:
-                expenses[f'{celendar_day[day_number]}{line}'] = dict_product[key][0]
+                expenses[f'{celendar_day[day_number]}{line}'] = dict_product[key][0] * dict_product[key][1]
             else:
                 expenses[f'B{line}'] = key
-                expenses[f'{celendar_day[day_number]}{line}'] = dict_product[key][0]
+                expenses[f'{celendar_day[day_number]}{line}'] = dict_product[key][0] * dict_product[key][1]
                 expenses.insert_rows(line + 1, 1)
 
     def search_month_number(self, month):
@@ -73,20 +65,10 @@ for i in range(len(my_json)):
     for i in range(len(cheque["ticket"]["document"]["receipt"]["items"])):
         dict_product[cheque["ticket"]["document"]["receipt"]["items"][i]["name"]] = [cheque["ticket"]["document"]["receipt"]["items"][i]["price"] / 100,
                                                                                       cheque["ticket"]["document"]["receipt"]["items"][i]["quantity"],
-                                                                                        cheque['createdAt'][0:-15]]
+                                                                                        cheque["ticket"]["document"]["receipt"]['dateTime'][0 : 10]]
     ch = Check(dict_product)
   
 
-wb.save('test.xlsx')
+wb.save('C:\\Users\\Alex_job\\Documents\\Git\\Test_site\\programma_dly_obrabotki_chekov\\test.xlsx')
 wb.close()
 print('Good')
-
-
-
-
-
-
-
-#'C:\\Users\\Alex_job\\Documents\\Git\\Test_site\\My.json'
-
-#'C:\\Users\\Alex_job\\Documents\\Git\\Test_site\\programma_dly_obrabotki_chekov\\extract.json'
