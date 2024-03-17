@@ -4,11 +4,11 @@ import json
 #===============================================
 #  Json файла с чеками
 
-with open('C:\\Users\\Alex_job\\Documents\\Git\\Test_site\\programma_dly_obrabotki_chekov\\extract.json', mode= 'r', encoding= 'UTF-8') as file:
+with open('C:\\Users\\Alex_job\\Documents\\Git\\Test_site\\programma_dly_obrabotki_chekov\\project\\extract.json', mode= 'r', encoding= 'UTF-8') as file:
     my_file = json.load(file)
     new_json = json.dumps(my_file, ensure_ascii= False, indent= 4)
     my_json = json.loads(new_json)
-    with open('cheque.json', 'w', encoding= 'UTF-8') as out_file:
+    with open('C:\\Users\\Alex_job\\Documents\\Git\\Test_site\\programma_dly_obrabotki_chekov\\project\\cheque.json', 'w', encoding= 'UTF-8') as out_file:
         json.dump(my_file, out_file, ensure_ascii= False, indent= 4)\
 
 
@@ -22,7 +22,7 @@ celendar_month = {1:'Январь', 2:'Февраль', 3:'Март', 4:'Апр�
 #===============================================
 #  Открытие сущетвующего файла exel и его наполнение чеками
 
-wb = openpyxl.load_workbook(filename= 'C:\\Users\\Alex_job\\Documents\\Git\\Test_site\\programma_dly_obrabotki_chekov\\test.xlsx')
+wb = openpyxl.load_workbook(filename= 'C:\\Users\\Alex_job\\Documents\\Git\\Test_site\\programma_dly_obrabotki_chekov\\my_finances.xlsx')
 
 expenses = wb['Расходы']
 income = wb['Доходы']
@@ -69,6 +69,6 @@ for i in range(len(my_json)):
     ch = Check(dict_product)
   
 
-wb.save('C:\\Users\\Alex_job\\Documents\\Git\\Test_site\\programma_dly_obrabotki_chekov\\test.xlsx')
+wb.save('C:\\Users\\Alex_job\\Documents\\Git\\Test_site\\programma_dly_obrabotki_chekov\\my_finances.xlsx')
 wb.close()
 print('Good')
