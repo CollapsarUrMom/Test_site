@@ -7,6 +7,9 @@ class TaskList:
     def add_task(self, value):
         self.tasks.append(value)
 
+    def remove_task(self, task):
+        self.tasks.remove(task)
+
 class Task:
     
     def __init__(self, name, description, status= False) -> None:
@@ -14,8 +17,28 @@ class Task:
         self.description = description
         self.status = status
 
+    def display(self):
+        if self.status == True:
+            print(f'{self.name} Сделана')
+        print(f'{self.name} Не сделана')
+
 class TaskManager:
-    pass
+    
+    def __init__(self, taskList) -> None:
+        self.task_list = taskList
+
+    def show_tasks(self):
+        self.task_list.__dict__['tasks']
+
+    def mark_done(self, task):
+        self.task = task
+        self.task.status = True
+
+    def mark_updone(self, task):
+        self.task = task
+        self.task.status = True
+
+        
 
 
 # Ниже код для проверки классов Task, TaskList и TaskManager
