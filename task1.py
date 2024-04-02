@@ -1,15 +1,4 @@
 # Напишите определение классов Task, TaskList и TaskManager
-class TaskList:
-    
-    def __init__(self) -> None:
-        self.tasks = []
-
-    def add_task(self, value):
-        self.tasks.append(value)
-
-    def remove_task(self, task):
-        self.tasks.remove(task)
-
 class Task:
     
     def __init__(self, name, description, status= False) -> None:
@@ -19,8 +8,21 @@ class Task:
 
     def display(self):
         if self.status == True:
-            print(f'{self.name} Сделана')
-        print(f'{self.name} Не сделана')
+            print(f'{self.name} (Сделана)')
+        else:
+            print(f'{self.name} (Не сделана)')
+
+class TaskList:
+    
+    def __init__(self) -> None:
+        self.tasks = []
+
+    def add_task(self, task):
+        self.tasks.append(task)
+
+    def remove_task(self, task):
+        self.tasks.remove(task)
+
 
 class TaskManager:
     
@@ -28,15 +30,13 @@ class TaskManager:
         self.task_list = taskList
 
     def show_tasks(self):
-        self.task_list.__dict__['tasks']
+        [task.display() for task in self.task_list.tasks]
 
     def mark_done(self, task):
-        self.task = task
-        self.task.status = True
+        task.status = True
 
     def mark_updone(self, task):
-        self.task = task
-        self.task.status = True
+        task.status = True
 
         
 
