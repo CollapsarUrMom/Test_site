@@ -30,19 +30,42 @@ income = wb['Доходы']
 
 class Check:
 
-    def __init__(self, name, data, price, quantity) -> None:
-        self.name = name
+    def __init__(self, inf, data) -> dict:
+        self.inf = inf
         self.data = data
-        self.price = price
-        self.quantity = quantity
 
+    def searching_for_an_empty_cell(self, name, price, month, day):
+        count = 1
+        while expenses[f'A{count}'].value != celendar_month[month]:
+            count += 1
+        while expenses[f'B{count + 1}'].value != None or name:
+            count += 1
+        expenses[f'B{count}'] = name
+        expenses[f'{celendar_day[day]}{count}'] = price
 
 class CheckList:
 
-    def __init__(self) -> None:
-        pass
-print(my_json[0])
-purchases = Check()
+    def __init__(self) -> list:
+        self.purchases = []
+
+    def add_product(self, product) -> list:
+        self.purchases.append(product)
+
+
+basket = CheckList()
+
+for i in range(len(my_json)):
+    product = Check(my_json[i]['ticket']['document']['receipt']['items'][0],
+                    my_json[i]['ticket']['document']['receipt']['dateTime'][:10].split('-'))
+    basket.add_product(product)
+    product.searching_for_an_empty_cell(product.inf['name'], product.inf['price'] / 100 * product.inf['quantity'],
+                                        int(product.data[1]), int(product.data[2]))
+
+for i in basket.purchases:
+    print(i.inf['name'])
+    
+
+print('Yes')
   
 
 wb.save('C:\\Users\\Alex_job\\Documents\\Git\\Test_site\\programma_dly_obrabotki_chekov\\my_finances.xlsx')
