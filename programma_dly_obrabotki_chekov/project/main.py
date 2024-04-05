@@ -1,5 +1,8 @@
 import openpyxl
 import json
+import data_base
+import Check
+import CheckList
 
 #===============================================
 #  Json файла с чеками
@@ -28,43 +31,17 @@ expenses = wb['Расходы']
 income = wb['Доходы']
 
 
-class Check:
-
-    def __init__(self, inf, data) -> dict:
-        self.inf = inf
-        self.data = data
-
-    def searching_for_an_empty_cell(self, name, price, month, day):
-        count = 1
-        while expenses[f'A{count}'].value != celendar_month[month]:
-            count += 1
-        while expenses[f'B{count + 1}'].value != None or name:
-            count += 1
-        expenses[f'B{count}'] = name
-        expenses[f'{celendar_day[day]}{count}'] = price
-
-class CheckList:
-
-    def __init__(self) -> list:
-        self.purchases = []
-
-    def add_product(self, product) -> list:
-        self.purchases.append(product)
-
-
-basket = CheckList()
+basket = CheckList.CheckList()
 
 for i in range(len(my_json)):
-    product = Check(my_json[i]['ticket']['document']['receipt']['items'][0],
+    product = Check.Check(my_json[i]['ticket']['document']['receipt']['items'][0],
+                    my_json[i]['ticket']['document']['receipt']['dateTime'][:10].split('-'))
+    data_base.Data_base.add_inf(my_json[i]['ticket']['document']['receipt']['items'][0],
                     my_json[i]['ticket']['document']['receipt']['dateTime'][:10].split('-'))
     basket.add_product(product)
-    product.searching_for_an_empty_cell(product.inf['name'], product.inf['price'] / 100 * product.inf['quantity'],
-                                        int(product.data[1]), int(product.data[2]))
 
-for i in basket.purchases:
-    print(i.inf['name'])
-    
 
+data_base.Data_base.add_inf('zsfdffd')
 print('Yes')
   
 
