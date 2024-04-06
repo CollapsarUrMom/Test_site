@@ -1,21 +1,5 @@
 import openpyxl
-import json
-import data_base
 import Check
-import CheckList
-
-#===============================================
-#  Json файла с чеками
-
-#D:\\Alex\\Python\\Test_site\\programma_dly_obrabotki_chekov  Компьютер
-#C:\\Users\\Alex_job\\Documents\\Git\\Test_site\\programma_dly_obrabotki_chekov  Ноутбук
-
-with open('D:\\Alex\\Python\\Test_site\\programma_dly_obrabotki_chekov\\project\\extract.json', mode= 'r', encoding= 'UTF-8') as file:
-    my_file = json.load(file)
-    new_json = json.dumps(my_file, ensure_ascii= False, indent= 4)
-    my_json = json.loads(new_json)
-    with open('D:\\Alex\\Python\\Test_site\\programma_dly_obrabotki_chekov\\project\\cheque.json', 'w', encoding= 'UTF-8') as out_file:
-        json.dump(my_file, out_file, ensure_ascii= False, indent= 4)\
 
 
 celendar_day = {1:'c', 2:'d', 3:'e', 4:'f', 5:'g', 6:'h', 7:'i', 8:'j', 9:'k', 10:'l', 11:'m', 12:'n',
@@ -25,28 +9,18 @@ celendar_day = {1:'c', 2:'d', 3:'e', 4:'f', 5:'g', 6:'h', 7:'i', 8:'j', 9:'k', 1
 celendar_month = {1:'Январь', 2:'Февраль', 3:'Март', 4:'Апрель', 5:'Май', 6:'Июнь',
                     7:'Июль', 8:'Август', 9:'Сентябрь', 10:'Октябрь', 11:'Ноябрь', 12:'Декабрь'}
 
+#D:\\Alex\\Python\\Test_site\\programma_dly_obrabotki_chekov  Компьютер
+#C:\\Users\\Alex_job\\Documents\\Git\\Test_site\\programma_dly_obrabotki_chekov  Ноутбук
+
 #===============================================
-#  Открытие сущетвующего файла exel и его наполнение чеками
+#  Json файла с чеками
 
-wb = openpyxl.load_workbook(filename= 'D:\\Alex\\Python\\Test_site\\programma_dly_obrabotki_chekov\\my_finances.xlsx')
-
-expenses = wb['Расходы']
-income = wb['Доходы']
+# Сделать провеку на наличие файла
 
 
-basket = CheckList.CheckList()
 
-for i in range(len(my_json)):
-    product = Check.Check(my_json[i]['ticket']['document']['receipt']['items'][0],
-                    my_json[i]['ticket']['document']['receipt']['dateTime'][:10].split('-'))
-    print(my_json[i]['ticket']['document']['receipt']['items'][0], my_json[i]['ticket']['document']['receipt']['dateTime'][:10].split('-'))
-    data_base.Data_base.add_inf(my_json[i]['ticket']['document']['receipt']['items'][0], my_json[i]['ticket']['document']['receipt']['dateTime'][:10].split('-'))
-    basket.add_product(product)
 
-data_base.Data_base.add_inf('zsfdffd')
-print('Yes')
-  
 
-wb.save('D:\\Alex\\Python\\Test_site\\programma_dly_obrabotki_chekov\\my_finances.xlsx')
-wb.close()
+
+
 print('Good')
