@@ -1,3 +1,5 @@
+# Stepik 3.7 Декоратор Property
+
 class Money:
 
     def __init__(self, dollars, cents) -> None:
