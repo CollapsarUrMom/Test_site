@@ -3,14 +3,19 @@ class Robot:
 
     def __init__(self, n) -> None:
         self.name = n
-        self.population += 1
+        Robot.population += 1
         print(f'Робот {self.name} был создан')
 
     def destroy(self):
-        self.population -= 1
+        Robot.population -= 1
         print(f'Робот {self.name} был уничтожен')
 
-    
+    def say_hello(self):
+        print(f'Робот {self.name} приветствует тебя, особь человеческого рода')
+
+    @classmethod
+    def how_many(cls):
+        print(f'{cls.population}, вот сколько нас еще осталось')
 
     
 
