@@ -13,9 +13,9 @@ class Robot:
     def say_hello(self):
         print(f'Робот {self.name} приветствует тебя, особь человеческого рода')
 
-    @classmethod
-    def how_many(cls):
-        print(f'{cls.population}, вот сколько нас еще осталось')
+    @staticmethod
+    def how_many():
+        print(f'{Robot.population}, вот сколько нас еще осталось')
 
     
 
