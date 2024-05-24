@@ -1,38 +1,33 @@
-class Robot:
-    population = 0
+class User:
 
-    def __init__(self, n) -> None:
-        self.name = n
-        Robot.population += 1
-        print(f'Робот {self.name} был создан')
+    def __init__(self, u, r):
+        self.user = u
+        self.role = r
 
-    def destroy(self):
-        Robot.population -= 1
-        print(f'Робот {self.name} был уничтожен')
+class Access:
 
-    def say_hello(self):
-        print(f'Робот {self.name} приветствует тебя, особь человеческого рода')
+    __access_list = ['admin', 'developer']
 
     @staticmethod
-    def how_many():
-        print(f'{Robot.population}, вот сколько нас еще осталось')
+    def __check_access(rol):
+        return rol in Access.__access_list
+        
+    @staticmethod
+    def get_access(ob):
+        if isinstance(ob, User):
+            if Access.__check_access(ob.role):
+                print(f'User {ob.user}: success')
+            else:
+                print('AccessDenied')
+        else:
+            print('AccessTypeError')
+            
 
-    
 
-# код ниже не нужно удалять, в нем находятся проверки
+user1 = User('batya99', 'admin')
+Access.get_access(user1) # печатает "User batya99: success"
 
-droid1 = Robot("R2-D2")
-assert droid1.name == 'R2-D2'
-assert Robot.population == 1
-droid1.say_hello()
-Robot.how_many()
-droid2 = Robot("C-3PO")
-assert droid2.name == 'C-3PO'
-assert Robot.population == 2
-droid2.say_hello()
-Robot.how_many()
-droid1.destroy()
-assert Robot.population == 1
-droid2.destroy()
-assert Robot.population == 0
-Robot.how_many()
+zaya = User('milaya_zaya999', 'user')
+Access.get_access(zaya) # печатает AccessDenied
+
+Access.get_access(5) # печатает AccessTypeError
