@@ -1,33 +1,49 @@
-# Напишите определение класса Vector
-class Vector:
+# Напишите определение класса Order       
+class Order:
 
-    def __init__(self) -> None:
-        pass
+    def __init__(self, product: list, customer) -> None:
+        self.cart = product
+        self.customer = customer
 
-# Ниже код для проверки методов класса Vector
 
-v1 = Vector(1, 2, 3)
-assert isinstance(v1, Vector)
-assert str(v1) == 'Вектор(1, 2, 3)'
+    def __add__(self, product: str):
+        return Order(self.cart + product.split(), self.customer)
 
-v2 = Vector()
-assert isinstance(v2, Vector)
-assert str(v2) == 'Пустой вектор'
 
-v3 = Vector([4, 5], 'hello', 3, -1.5, 1, 2)
-assert isinstance(v3, Vector)
-assert sorted(v3.values) == [1, 2, 3]
-assert str(v3) == 'Вектор(1, 2, 3)'
 
-v4 = Vector([4, 5], 'hello')
-assert str(v2) == 'Пустой вектор'
-assert v2.values == []
+    def __radd__(self, product: str):
+        return Order(product.split(',') + self.cart, self.customer)
+    
 
-v5 = Vector(1, 2, True)
-assert isinstance(v5, Vector)
-assert str(v5) == 'Вектор(1, 2)'
+    def __sub__(self, product: str):
+        return Order(self.cart - list[product], self.customer)
+    
 
-print(v1)
-print(v2)
-print(v3)
-print(v4)
+
+
+
+# Ниже код для проверки методов класса Order
+
+order = Order(['banana', 'apple'], 'Гена Букин')
+
+order_2 = order + 'orange'
+assert order.cart == ['banana', 'apple']
+assert order.customer == 'Гена Букин'
+assert order_2.cart == ['banana', 'apple', 'orange']
+
+order = 'mango' + order
+assert order.cart == ['mango', 'banana', 'apple']
+order = 'ice cream' + order
+assert order.cart == ['ice cream', 'mango', 'banana', 'apple']
+
+order = order - 'banana'
+assert order.cart == ['ice cream', 'mango', 'apple']
+
+order3 = order - 'banana'
+assert order3.cart == ['ice cream', 'mango', 'apple']
+
+order = order - 'mango'
+assert order.cart == ['ice cream', 'apple']
+order = 'lime' - order
+assert order.cart == ['ice cream', 'apple']
+print('Good')
