@@ -10,13 +10,20 @@ class Order:
         return Order(self.cart + product.split(), self.customer)
 
 
-
     def __radd__(self, product: str):
         return Order(product.split(',') + self.cart, self.customer)
     
 
+    # def __sub__(self, product: str):
+    #     return Order(self.cart - product.split(), self.customer)
+
+
     def __sub__(self, product: str):
-        return Order(self.cart - list[product], self.customer)
+        lst = []
+        for elem in self.cart:
+            if product not in elem:
+                lst.append(elem)
+        return Order(lst, self.customer)
     
 
 
