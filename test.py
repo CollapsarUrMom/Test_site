@@ -1,63 +1,24 @@
-# Напишите определение класса Rectangle       
-from functools import total_ordering
+# Напишите определение класса Addition       
+class Addition:
 
-@total_ordering
-class Rectangle:
-
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
-
-
-    @property
-    def area(self):
-        return self.width * self.height
+    def __call__(self, *args, **kwargs):
+        self.count = 0
+        for i in args:
+            if isinstance(i, (int, float)):
+                self.count += i
+        return f"Сумма переданных значений = {self.count}"
 
 
-    def __eq__(self, value):
-        if isinstance(value, Rectangle):
-            return self.area == value.area
-        elif isinstance(value, (int, float)):
-            return self.area == value
-        
-
-    def __lt__(self, value):
-        if isinstance(value, Rectangle):
-            return self.area < value.area
-        elif isinstance(value, (int, float)):
-            return self.area < value
+# Ниже код для проверки методов класса Addition
+add = Addition()
+assert add(10, 20) == "Сумма переданных значений = 30"
+assert add(1, 2, 3.4) == "Сумма переданных значений = 6.4"
+assert add(1, 2, 'hello', [1, 2], 3) == "Сумма переданных значений = 6"
 
 
-# Ниже код для проверки методов класса Rectangle
+add2 = Addition()
+assert add2(10, 20, 3, 3, 4, 3, 2, 43, 43) == "Сумма переданных значений = 131"
+assert add2() == "Сумма переданных значений = 0"
+assert add2('hello') == "Сумма переданных значений = 0"        
 
-r1 = Rectangle(3, 4)
-assert r1.width == 3
-assert r1.height == 4
-assert r1.area == 12
-assert isinstance(type(r1).area, property), 'Вы не создали property area'
-
-assert r1 > 11
-assert not r1 > 12
-assert r1 >= 12
-assert r1 <= 12
-assert not r1 > 13
-assert not r1 == 13
-assert r1 != 13
-assert r1 == 12
-
-r2 = Rectangle(2, 6)
-assert r1 == r2
-assert not r1 != r2
-assert not r1 > r2
-assert not r1 < r2
-assert r1 >= r2
-assert r1 <= r2
-
-r3 = Rectangle(5, 2)
-assert not r2 == r3
-assert r2 != r3
-assert r2 > r3
-assert not r2 < r3
-assert r2 >= r3
-assert not r2 <= r3
 print('Good')
