@@ -1,24 +1,35 @@
-# Напишите определение класса Addition       
-class Addition:
+class Building:
 
-    def __call__(self, *args, **kwargs):
-        self.count = 0
-        for i in args:
-            if isinstance(i, (int, float)):
-                self.count += i
-        return f"Сумма переданных значений = {self.count}"
+    def __init__(self, args):
+        self.lst_floors = []
+        self.lst_floors.extend([0] * args)
 
 
-# Ниже код для проверки методов класса Addition
-add = Addition()
-assert add(10, 20) == "Сумма переданных значений = 30"
-assert add(1, 2, 3.4) == "Сумма переданных значений = 6.4"
-assert add(1, 2, 'hello', [1, 2], 3) == "Сумма переданных значений = 6"
+    def __setitem__(self, floor, name):
+        self.lst_floors[floor] = name
+        return self.lst_floors
 
 
-add2 = Addition()
-assert add2(10, 20, 3, 3, 4, 3, 2, 43, 43) == "Сумма переданных значений = 131"
-assert add2() == "Сумма переданных значений = 0"
-assert add2('hello') == "Сумма переданных значений = 0"        
+    def __getitem__(self,floor):
+        if 0 < floor < len(self.lst_floors):
+            return self.lst_floors[floor]
+        else:
+            raise IndexError("Индекс за пределами коллекции")
 
-print('Good')
+
+    def __delitem__(self, floor):
+        if 0 <= floor < len(self.lst_floors):
+            self.lst_floors[floor] = None
+            # del self.lst_floors[floor]
+        else:
+            raise IndexError("Индекс за пределами коллекции")
+
+
+print('==================')
+iron_building = Building(22)  # Создаем здание с 22 этажами
+iron_building[0] = 'Reception'
+iron_building[1] = 'Oscorp Industries'
+iron_building[2] = 'Stark Industries'
+print(iron_building[2])
+del iron_building[2]
+print(iron_building[2])
