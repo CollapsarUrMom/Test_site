@@ -1,56 +1,94 @@
-# Напишите определение класса Order       
-class Order:
+# Напишите определение класса ShoppingCart   
+class ShoppingCart:
 
-    def __init__(self, product: list, customer) -> None:
-        self.cart = product
-        self.customer = customer
-
-
-    def __add__(self, product: str):
-        return Order(self.cart + product.split(), self.customer)
+    def __init__(self):
+        self.items = {}
 
 
-    def __radd__(self, product: str):
-        return Order(product.split(',') + self.cart, self.customer)
-    
-
-    # def __sub__(self, product: str):
-    #     return Order(self.cart - product.split(), self.customer)
-
-
-    def __sub__(self, product: str):
-        lst = []
-        for elem in self.cart:
-            if product not in elem:
-                lst.append(elem)
-        return Order(lst, self.customer)
-    
+    def __getitem__(self, name):
+        if name in self.items:
+            return self.items[name]
+        elif name not in self.items:
+            return 0
 
 
+    def __setitem__(self, name, quantity):
+        self.items[name] = quantity
 
 
-# Ниже код для проверки методов класса Order
+    def __delitem__(self, name):
+        del self.items[name]
+            
 
-order = Order(['banana', 'apple'], 'Гена Букин')
+    def add_item(self, name, quantity= 1):
+        if name in self.items:
+            self.items[name] = self.items.get(name, 0) + quantity
+        elif name not in self.items:
+            self.items[name] = quantity
 
-order_2 = order + 'orange'
-assert order.cart == ['banana', 'apple']
-assert order.customer == 'Гена Букин'
-assert order_2.cart == ['banana', 'apple', 'orange']
 
-order = 'mango' + order
-assert order.cart == ['mango', 'banana', 'apple']
-order = 'ice cream' + order
-assert order.cart == ['ice cream', 'mango', 'banana', 'apple']
+    def remove_item(self, name, quantity= 1):
+        if name not in self.items:
+            return ValueError
+        elif quantity < self.items[name]:
+            self.items[name] = self.items.get(name, 0) - quantity
+        elif quantity >= self.items[name]:
+            del self.items[name]
 
-order = order - 'banana'
-assert order.cart == ['ice cream', 'mango', 'apple']
 
-order3 = order - 'banana'
-assert order3.cart == ['ice cream', 'mango', 'apple']
 
-order = order - 'mango'
-assert order.cart == ['ice cream', 'apple']
-order = 'lime' - order
-assert order.cart == ['ice cream', 'apple']
-print('Good')
+
+
+
+# Ниже код для проверки методов класса ShoppingCart
+
+# Create a new shopping cart
+cart = ShoppingCart()
+
+# Add some items to the cart
+cart.add_item('Apple', 3)
+cart.add_item('Banana', 2)
+cart.add_item('Orange')
+
+assert cart['Banana'] == 2
+assert cart['Orange'] == 1
+assert cart['Kivi'] == 0
+
+cart.add_item('Orange', 9)
+assert cart['Orange'] == 10
+
+print("Shopping Cart:")
+for item_name in cart.items:
+    print(f"{item_name}: {cart[item_name]}")
+
+cart['Apple'] = 5
+cart['Banana'] = 7
+cart['Kivi'] = 11
+assert cart['Apple'] == 5
+assert cart['Banana'] == 7
+assert cart['Kivi'] == 11
+
+print("Updated Shopping Cart:")
+for item_name in cart.items:
+    print(f"{item_name}: {cart[item_name]}")
+
+# Remove an item from the cart
+cart.remove_item('Banana')
+assert cart['Banana'] == 6
+
+cart.remove_item('Apple', 4)
+assert cart['Apple'] == 1
+
+cart.remove_item('Apple', 2)
+assert cart['Apple'] == 0
+assert 'Apple' not in cart.items
+
+cart.remove_item('Potato')
+
+del cart['Banana']
+assert cart['Banana'] == 0
+assert 'Banana' not in cart.items
+
+print("Updated Shopping Cart:")
+for item_name in cart.items:
+    print(f"{item_name}: {cart[item_name]}")
