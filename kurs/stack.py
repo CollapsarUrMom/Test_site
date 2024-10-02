@@ -4,7 +4,7 @@ from collections import deque
 
 
 class Solution:
-    def isValid(self, data: str) -> bool:
+    def isValid(self, s: str) -> bool:
 
         my_stack = deque()
 
@@ -13,10 +13,12 @@ class Solution:
                 '{' : '}'}
         
 
-        for brasket in data:
+        for brasket in s:
             if brasket in pairs:
                 my_stack.append(brasket)
-            elif brasket != pairs[my_stack.popleft()]:
+            elif not my_stack:
+                return False
+            elif brasket != pairs[my_stack.pop()]:
                 return False
         return len(my_stack) == 0
 
@@ -31,4 +33,6 @@ print(stack.isValid(s))
 s = "(]"
 print(stack.isValid(s))
 s = "([])"
+print(stack.isValid(s))
+s = ']'
 print(stack.isValid(s))

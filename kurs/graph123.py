@@ -23,8 +23,10 @@ root.right.right.left = TreeNode(9)
 
 
 
-deque = deque([0])
+que = deque([0])
 
-while deque:
-    pass
+while que:
+    a = que.pop()
+    
+
 
