@@ -1,5 +1,5 @@
-from collections import deque
-
+from queue import LifoQueue
+print('==========================================================')
 
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -13,20 +13,29 @@ root.left = TreeNode(2)
 root.right = TreeNode(3)
 root.left.left = TreeNode(4)
 root.left.right = TreeNode(5)
-root.right.left = TreeNode(None)
 root.right.right = TreeNode(8)
-root.left.left.left = TreeNode(None)
-root.left.left.right = TreeNode(None)
 root.left.right.left = TreeNode(6)
 root.left.right.right = TreeNode(7)
 root.right.right.left = TreeNode(9)
 
 
+que = LifoQueue()
+result = []
 
-que = deque([0])
+while not que.empty() or root:
 
-while que:
-    a = que.pop()
+    while root:
+        que.put(root)
+        root = root.left
+    root = que.get()
+    result.append(root.val)
+    root = root.right
+
+
+print(result)
+    
+
     
 
 
+# [4,2,6,5,7,1,3,9,8]
