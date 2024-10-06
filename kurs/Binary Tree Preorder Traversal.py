@@ -1,7 +1,12 @@
+from queue import LifoQueue
+
+que = LifoQueue()
+
 
 print('==========================================================')
 
 class TreeNode(object):
+
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
@@ -9,13 +14,24 @@ class TreeNode(object):
 
 
 class Solution(object):
+
     def preorderTraversal(self, root):
         """
         :type root: TreeNode
         :rtype: List[int]
         """
+        result = []
 
+        while not que.empty() or root:
 
+            while root:
+                result.append(root.val)
+                que.put(root)
+                root = root.left
+            root = que.get()
+            root = root.right
+
+        return result
 
 
 root = TreeNode(1)
@@ -30,5 +46,5 @@ root.right.right.left = TreeNode(9)
 
 tree = Solution()
 
-tree.preorderTraversal(root)
+print(tree.preorderTraversal(root))
 
