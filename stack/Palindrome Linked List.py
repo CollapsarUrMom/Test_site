@@ -17,12 +17,13 @@ class ListNode:
 
 
     def sizeof(self):
-        len(self.val)
+        print(self.val)
+        return self.val
 
 
 class Solution:
     def isPalindrome(self, head: list[ListNode]) -> bool:
-        while head.sizeof():
+        while head.sizeof() != 0:
             if head.pop() == head.popleft():
                 continue
             else:
